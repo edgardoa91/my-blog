@@ -3,16 +3,16 @@ defmodule Blog.Blogs do
 
   use NimblePublisher,
     build: Blog.Post,
-    from: Application.app_dir(:blog, "posts/**/*.md"),
+    from: "posts/**/*.md",
     as: :posts,
-    highlighters: [:makeup_elixir, :makeup_diff]
+    highlighters: [:makeup_elixir, :makeup_erlang, :makeup_diff]
 
   defmodule NotFoundError do
     defexception [:message, plug_status: 404]
   end
 
-  @published_posts @posts |> Enum.sort_by(& &1.published_at, {:desc, Date}) |> Enum.filter(& &1.published)
-  @all_posts Enum.sort_by(@posts, & &1.published_at, {:desc, Date})
+  @published_posts @posts |> Enum.sort_by(& &1.date, {:desc, Date}) |> Enum.filter(& &1.published)
+  @all_posts Enum.sort_by(@posts, & &1.date, {:desc, Date})
 
 
   # Get all posts tags

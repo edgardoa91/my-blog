@@ -29,6 +29,16 @@ config :blog, Blog.Mailer, adapter: Swoosh.Adapters.Local
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 
+# Configure tailwind
+config :tailwind, version: "3.1.7", default: [
+  args: ~w(
+    --config=tailwind.config.js
+    --input=css/app.css
+    --output=../priv/static/assets/app.css
+  ),
+  cd: Path.expand("../assets", __DIR__)
+]
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.14.29",

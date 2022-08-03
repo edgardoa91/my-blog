@@ -18,10 +18,9 @@ defmodule BlogWeb.BlogLive do
   end
 
   def mount(_params, _session, socket) do
-    # posts = Blog.Blogs.published_posts()
-    posts = Blog.Blogs.all_posts()
+    posts = Blog.Blogs.published_posts()
 
-    IO.inspect(posts)
+    # IO.inspect(posts)
     {:ok, socket
     |> assign(:posts, posts)
     |> assign(:page_title, "Blog"), temporary_assigns: [posts: []]}

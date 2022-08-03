@@ -1,6 +1,6 @@
 defmodule Blog.Post do
   @enforce_keys [:id, :title, :body, :description, :reading_time, 
-    :tags, :published_at]
+    :tags, :date]
   defstruct [
     :id, 
     :title,
@@ -8,7 +8,7 @@ defmodule Blog.Post do
     :description,
     :reading_time,
     :tags,
-    :published_at,
+    :date,
     published: true
   ]
 
@@ -27,7 +27,7 @@ defmodule Blog.Post do
       __MODULE__,
       [
         id: slug, 
-        published_at: Date.from_iso8601!("#{year}-#{month}-#{day}"),
+        date: Date.from_iso8601!("#{year}-#{month}-#{day}"),
         body: body,
         reading_time: estimate_reading_time(body),
       ] ++ Map.to_list(attrs)
